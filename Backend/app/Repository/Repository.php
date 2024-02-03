@@ -2,13 +2,15 @@
 
 namespace App\Repository;
 
+use GuzzleHttp\Psr7\Request;
+
 abstract class Repository
 {
     abstract public function model();
 
 
-    public function createdata(array $data){
-        return $this->model()::insert($data);
+    public function store(Request $request){
+
     }
 
 }

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,16 @@ Route::post("/userRegistration", [UserController::class, 'userRegistration']);
 Route::post("/login-api", [UserController::class, 'login']);
 
 Route::get("/profile", [UserController::class, 'profile'])->middleware('auth:api');
+
+
+
+Route::middleware('auth:api')->group(function(){
+    Route::prefix('/category')->controller(CategoryController::class)->group(function(){
+        Route::post('/store','store');
+        Route::get('/list','index');
+        Route::get('/edit/{id}','edit');
+    });
+});
+
+
 
